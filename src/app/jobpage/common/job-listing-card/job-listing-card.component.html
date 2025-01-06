@@ -1,0 +1,59 @@
+<div style="border-left:3px solid #456476" class="tw-bg-white tw-min-w-[95vw] sm:tw-min-w-[95vw] md:tw-min-w-[330px] 2xl:tw-min-w-[358px] xl:tw-min-w-[400px] lg:tw-min-w-[300px] tw-min-h-[124px] tw-rounded-lg tw-shadow-lg tw-p-4 tw-w-full tw-max-w-md tw-mx-auto">
+  <div class="tw-flex tw-justify-between tw-items-center">
+    <div class='tw-flex tw-flex-row tw-flex-wrap tw-gap-2'>
+      <div *ngFor="let type of jobs.jobTypes">
+        <div class="tw-flex tw-items-center">
+          <span
+            style="background:#E8ECEE; color: #4B687A; border: 0.4px solid #879982; font-weight: 200;"
+            class="tw-bg-gray-55 tw-text-blue-800 tw-text-8 sm:tw-text-8 md:tw-text-10 lg:tw-text-10 xl:tw-text-14 tw-rounded-sm tw-ps-1 tw-pe-1">
+        {{ type ?? '--' }}
+        </span>
+        </div>
+      </div>
+      <span
+        style="background: #E8ECEE; color: #4B687A; border:0.4px solid #879982; font-weight: 200"
+        class="tw-bg-gray-55 tw-text-blue-800 tw-text-8 sm:tw-text-8 md:tw-text-10 lg:tw-text-10 xl:tw-text-14 tw-rounded-sm tw-ps-1 tw-pe-1">
+        {{ 'Exp.' }} {{ jobs.minExperience }} {{ '-' }} {{ jobs.maxExperience }} {{ 'Yrs' }}
+      </span>
+    </div>
+    <div (click)="$event.stopPropagation(); openModal(jobs.id)" aria-label="Share Job" class="tw-text-blue-800 tw-hover:text-blue-600">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M13.803 5.33333C13.803 3.49238 15.3022 2 17.1515 2C19.0008 2 20.5 3.49238 20.5 5.33333C20.5 7.17428 19.0008 8.66667 17.1515 8.66667C16.2177 8.66667 15.3738 8.28596 14.7671 7.67347L10.1317 10.8295C10.1745 11.0425 10.197 11.2625 10.197 11.4872C10.197 11.9322 10.109 12.3576 9.94959 12.7464L15.0323 16.0858C15.6092 15.6161 16.3473 15.3333 17.1515 15.3333C19.0008 15.3333 20.5 16.8257 20.5 18.6667C20.5 20.5076 19.0008 22 17.1515 22C15.3022 22 13.803 20.5076 13.803 18.6667C13.803 18.1845 13.9062 17.7255 14.0917 17.3111L9.05007 13.9987C8.46196 14.5098 7.6916 14.8205 6.84848 14.8205C4.99917 14.8205 3.5 13.3281 3.5 11.4872C3.5 9.64623 4.99917 8.15385 6.84848 8.15385C7.9119 8.15385 8.85853 8.64725 9.47145 9.41518L13.9639 6.35642C13.8594 6.03359 13.803 5.6896 13.803 5.33333Z"
+          fill="#13296c"
+        />
+      </svg>
+    </div>
+  </div>
+
+  <h4 style="font-weight: 400" class="tw-text-18 tw-text-gray-800 tw-mt-2 tw-sm:text-18 tw-md:text-20 tw-lg:text-22 tw-xl:text-24">
+    {{ jobs?.title ?? '--' }}
+  </h4>
+  <div class="tw-flex tw-items-center tw-justify-between tw-mt-2 tw-text-gray-600">
+    <div class="tw-flex tw-items-center tw-justify-center">
+      <svg
+        width="14"
+        height="14"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 64 64"
+        fill="#545454">
+        <path
+          d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24 C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24 C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"></path>
+      </svg>
+      <span class="tw-ml-2 tw-text-10 sm:tw-text-10 md:tw-text-12 lg:tw-text-14 xl:tw-text-16">
+        {{ jobs?.workLocations ?? '--' }}
+      </span>
+    </div>
+    <span class="tw-text-gray-600 tw-text-14">
+      Posted on: <span>{{ jobs?.createdDate | date: "MMM dd yyyy" }}
+    </span>
+    </span>
+  </div>
+</div>

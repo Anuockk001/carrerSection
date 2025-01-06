@@ -1,0 +1,15 @@
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+section .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+section .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

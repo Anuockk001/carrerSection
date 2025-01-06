@@ -1,0 +1,58 @@
+<div class="tw-w-full">
+    <aside class="tw-w-full xl:tw-px-4 tw-px-0">
+        <h4 class="tw-text-22">Filters</h4>
+        <hr />
+        <div class="xl:tw-block tw-flex tw-flex-col xl:tw-flex-row tw-justify-between tw-mt-5">
+
+            <!-- Job Type Section -->
+            <div class="tw-mb-4">
+                <h4 class="tw-text-[18px] tw-font-fw-500 tw-mb-2">Job Type</h4>
+                <div *ngFor="let type of ['Permanent', 'Contract']">
+                    <label class="tw-block">
+                        <input
+                                type="checkbox"
+                                name="jobType"
+                                [value]="type"
+                                [checked]="localJobTypes.includes(type)"
+                                (change)="handleJobTypeChange($event)"
+                        />
+                        {{ type }}
+                    </label>
+                </div>
+            </div>
+
+            <!-- Work Location Section -->
+            <div class="tw-mb-4">
+                <h4 class="tw-text-[18px] tw-font-fw-500 tw-mb-2">Work Location</h4>
+                <div *ngFor="let location of ['Onsite', 'Hybrid', 'Remote']">
+                    <label class="tw-block">
+                        <input
+                                type="checkbox"
+                                [value]="location"
+                                [checked]="localWorkLocations.includes(location)"
+                                (change)="handleWorkLocationChange($event)"
+                        />
+                        {{ location }}
+                    </label>
+                </div>
+            </div>
+
+            <!-- Experience Range Section -->
+            <div class="tw-mb-4">
+                <h4 class="tw-text-[18px] tw-font-fw-500 tw-mb-2">Experience Range</h4>
+                <div *ngFor="let range of experienceKeys()">
+                    <label class="tw-block">
+                        <input
+                                type="checkbox"
+                                [value]="range"
+                                [checked]="isRangeSelected(range)"
+                                (change)="handleExperienceRangeChange($event, range)"
+                        />
+                        {{ range }}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </aside>
+</div>

@@ -1,0 +1,16 @@
+.cursor-p {
+  cursor: pointer;
+}
+
+.shareInput {
+  background-color:transparent;
+  border:1px solid grey;
+  width:70%
+}
+.shareInput:focus {
+  outline:none;
+}
+
+.copyButton {
+  border:1px solid grey;
+}

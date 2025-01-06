@@ -1,0 +1,415 @@
+<app-job-header></app-job-header>
+<div>
+  <app-job-top-section
+    [data]="{
+      heading: post.title,
+      description: 'Posted on ' + (post?.createdDate | date: 'MMM dd YYYY')
+    }"
+  ></app-job-top-section>
+</div>
+<div class="tw-container tw-px-4 sm:tw-px-6 lg:tw-px-8 tw-mx-auto">
+  <div class=" tw-mt-6 tw-mb-4" style="border-bottom: 1px solid #C7C7C8">
+    <div class="tw-text-black tw-flex tw-items-center tw-justify-start">
+      <a class="tw-text-black tw-text-lg sm:tw-text-lg md:tw-text-xl md:tw-mb-4 tw-me-2" href="/">Job Listing</a>
+      <a class="tw-text-black tw-text-lg sm:tw-text-lg md:tw-text-xl md:tw-mb-4 tw-ms-2" href="/">Job Detail</a>
+      <a class="tw-text-black tw-text-lg sm:tw-text-lg md:tw-text-xl md:tw-mb-4 tw-ms-2" href="/">Job Application</a>
+    </div>
+  </div>
+  <div>
+    <div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div *ngFor="let section of fieldsConfig;let i = index">
+          <div [ngStyle]="{'border-bottom': i === fieldsConfig.length - 1 ? 'none' : '1px solid #C7C7C8'}"
+               class="tw-py-5">
+            <span class="tw-block tw-text-lg tw-font-bold tw-mb-4">{{ section.section }}</span>
+            <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 tw-gap-x-3.5">
+              <div [ngClass]="{
+                'tw-col-span-1 sm:tw-col-span-2':
+                 ['currentCity', 'jobTitle', 'primarySkills', 'linkedinUrl', 'notes', 'language'].includes(field.name),
+                 'tw-w-full': true }" *ngFor="let field of section.fields; let index">
+
+                <div *ngIf="field.type === 'text'" class="tw-w-full">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <div>
+                      <label style="margin-bottom: 0;">{{ field.label }}</label>
+                      <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    </div>
+                    <span class="tw-text-red-500" *ngIf="isInvalidControl(field.name)">
+                        {{ field.placeholder }} is required
+                      </span>
+                  </div>
+                  <input
+                    style="border:1px solid #ced4da"
+                    [formControlName]="field.name"
+                    [placeholder]="field.placeholder"
+                    [ngClass]="
+                    {'tw-mt-1 tw-py-2 tw-px-3 tw-h-[40px] tw-block tw-w-full tw-rounded-md tw-shadow-sm tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm': true,
+                    'tw-border-red-500 tw-focus:ring-red-500 tw-focus:border-red-500': isInvalidControl(field.name),
+                    'tw-border-gainsboro': !isInvalidControl(field.name)}"
+                  >
+                </div>
+
+                <!-- Email Input Field -->
+                <div *ngIf="field.type === 'email'" class="tw-w-full tw-mt-3">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <div>
+                      <label style="margin-bottom: 0;">{{ field.label }}</label>
+                      <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    </div>
+                    <span class="tw-text-red-500" *ngIf="isInvalidControl(field.name)">
+                        {{ field.placeholder }} is required
+                      </span>
+                  </div>
+                  <input
+                    style="border:1px solid #ced4da"
+                    [formControlName]="field.name"
+                    [placeholder]="field.placeholder"
+                    [ngClass]="{'tw-mt-1 tw-py-2 tw-px-3 tw-h-[40px] tw-block tw-w-full tw-rounded-md tw-shadow-sm tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm': true,
+                    'tw-border-red-500 tw-focus:ring-red-500 tw-focus:border-red-500': isInvalidControl(field.name),
+                    'tw-border-gainsboro': !isInvalidControl(field.name)}"
+                  >
+                </div>
+
+                <div *ngIf="field.type === 'phoneNumber'" class="tw-w-full tw-relative tw-top-[17px]">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <div>
+                      <label style="margin-bottom: 0;">{{ field.label }}</label>
+                      <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    </div>
+                    <span class="tw-text-red-500" *ngIf="isInvalidControl(field.name)">
+                        {{ field.placeholder }} is required
+                      </span>
+                  </div>
+                  <div>
+                    <ngx-intl-tel-input
+                      [cssClass]="'custom'"
+                      [preferredCountries]="preferredCountries"
+                      [enableAutoCountrySelect]="true"
+                      [enablePlaceholder]="true"
+                      [searchCountryFlag]="true"
+                      [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]"
+                      [selectFirstCountry]="false"
+                      [selectedCountryISO]="CountryISO.India"
+                      [maxLength]="15"
+                      [phoneValidation]="true"
+                      [separateDialCode]="true"
+                      [numberFormat]="PhoneNumberFormat.National"
+                      formControlName="mobile"
+                    ></ngx-intl-tel-input>
+                  </div>
+                </div>
+
+                <!-- Number Input Field -->
+                <div *ngIf="field.type === 'number'" class="tw-w-full tw-mt-3">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <div>
+                      <label style="margin-bottom: 0;">{{ field.label }}</label>
+                      <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    </div>
+                    <span class="tw-text-red-500" *ngIf="isInvalidControl(field.name)">
+                        {{ field.placeholder }} is required
+                      </span>
+                  </div>
+                  <input
+                    style="border:1px solid #ced4da"
+                    [formControlName]="field.name"
+                    [placeholder]="field.placeholder"
+                    [ngClass]="{'tw-mt-1 tw-py-2 tw-px-3 tw-h-[40px] tw-block tw-w-full tw-rounded-md tw-shadow-sm tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm': true,
+                      'tw-border-red-500 tw-focus:ring-red-500 tw-focus:border-red-500': isInvalidControl(field.name),
+                      'tw-border-gainsboro': !isInvalidControl(field.name)}"
+                  >
+                  <div *ngIf="form.get('currentCTC')?.value !== '' && field.name === 'currentCTC'"
+                       class="text-theme_bgcolor">
+                    {{ convertToWords(form.get('currentCTC')?.value) }}
+                  </div>
+                  <div *ngIf="form.get('expectedCTC')?.value !== '' && field.name === 'expectedCTC'"
+                       class="text-theme_bgcolor">
+                    {{ convertToWords(form.get('expectedCTC')?.value) }}
+                  </div>
+                </div>
+
+                <div *ngIf="field.type === 'autoComplete'" class="tw-w-full">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <div>
+                      <label style="margin-bottom: 0;">{{ field.label }}</label>
+                      <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    </div>
+                    <span class="tw-text-red-500" *ngIf="isInvalidControl(field.name)">
+                      {{ field.placeholder }} is required
+                    </span>
+                  </div>
+                  <input
+                    style="border:1px solid #ced4da"
+                    [formControlName]="field.name"
+                    [placeholder]="field.placeholder"
+                    [(ngModel)]="inputValue"
+                    (input)="handleInputChange($event)"
+                    [ngClass]="{
+                    'tw-mt-1 tw-py-2 tw-px-3 tw-h-[40px] tw-block tw-w-full tw-rounded-md tw-shadow-sm tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm': true,
+                    'tw-border-red-500 tw-focus:ring-red-500 tw-focus:border-red-500': isInvalidControl(field.name),
+                    'tw-border-gainsboro': !isInvalidControl(field.name)
+                    }"
+                  />
+                  <div *ngIf="isDropdownOpen" #dropdown>
+                    <div
+                      class="tw-absolute tw-border tw-bg-white tw-w-full tw-mt-1 tw-max-h-60 tw-overflow-auto tw-z-10 tw-shadow-md">
+                      <div *ngFor="let item of filteredSuggestions" (click)="handleItemSelect(item)"
+                           class="tw-px-4 tw-py-2 tw-cursor-pointer hover:tw-bg-gray-200 tw-border-b tw-border-gray-50">
+                        {{ item.name }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dropdown Field -->
+                <div *ngIf="field.type === 'dropdown'" class="tw-w-full tw-mt-3">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <div>
+                      <label style="margin-bottom: 0;">{{ field.label }}</label>
+                      <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    </div>
+                    <span class="tw-text-red-500" *ngIf="isInvalidControl(field.name)">
+                        {{ field.placeholder }} is required
+                      </span>
+                  </div>
+                  <select
+                    style="border:1px solid #ced4da"
+                    [formControlName]="field.name"
+                    [ngClass]="{'tw-mt-1 tw-py-2 tw-px-3 tw-h-[40px] tw-block tw-w-full tw-rounded-md tw-shadow-sm tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm': true,
+                    'tw-border-red-500 tw-focus:ring-red-500 tw-focus:border-red-500': isInvalidControl(field.name),
+                    'tw-border-gainsboro': !isInvalidControl(field.name)}"
+                  >
+                    <option value="" disabled>
+                      Select {{ field.label }}
+                    </option>
+                    <option *ngFor="let option of field.options" [value]="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                </div>
+
+                <div *ngIf="field.type === 'skills'" class="tw-relative tw-w-full tw-mt-3">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <div>
+                      <label style="margin-bottom: 0;">{{ field.label }}</label>
+                      <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    </div>
+                    <span class="tw-text-red-500" *ngIf="isInvalidControl(field.name)">
+                      {{ field.placeholder }} is required
+                    </span>
+                  </div>
+
+                  <div class="tw-relative tw-flex tw-flex-wrap tw-items-center tw-gap-2 tw-border tw-rounded-md tw-border-gainsboro tw-shadow-sm focus-within:tw-ring-indigo-500 focus-within:tw-border-indigo-500 tw-text-sm">
+                    <div *ngFor="let item of selectedItems"
+                         class="tw-py-2 tw-border-gray-200 tw-text-indigo-600 tw-px-3 tw-rounded-full tw-text-sm tw-flex tw-items-center tw-gap-2 tw-bg-white tw-shadow-sm tw-overflow-hidden tw-z-10">
+                      <span [class]="getSkillColor(item.level) + ' tw-w-3 tw-h-3 tw-rounded-full'"></span>
+                      <span class="tw-flex-grow">{{ item.title }}</span>
+                      <button
+                        type="button"
+                        class="tw-text-red-500 hover:tw-text-red-700 tw-bg-transparent tw-border-0 tw-outline-none"
+                        (click)="removeSkill(item.id)">
+                        &times;
+                      </button>
+                    </div>
+
+                    <input
+                      style="border:1px solid #ced4da"
+                      class="tw-flex-grow tw-bg-transparent focus:tw-outline-none tw-pl-2"
+                      [placeholder]="field.placeholder"
+                      [required]="field.required"
+                      [formControl]="inputControl"
+                      (focus)="isSkillDropdownOpen = true"
+                      (input)="handleSkillInputChange($event)"
+                      [ngClass]="{'tw-mt-1 tw-py-2 tw-px-3 tw-min-h-[40px] tw-block tw-w-full tw-rounded-md tw-shadow-sm tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm': true,
+                      'tw-border-red-500 tw-focus:ring-red-500 tw-focus:border-red-500': isInvalidControl(field.name),
+                      'tw-border-gainsboro': !isInvalidControl(field.name)}"
+                    />
+                  </div>
+
+                  <div *ngIf="isSkillDropdownOpen" #dropdownSkills style="border:1px solid; position: absolute;"
+                       class="tw-bg-white tw-border-1 tw-border-gray-300 tw-rounded-lg tw-overflow-hidden">
+                    <div style="border-bottom: 1px solid"
+                         class="tw-text-sm tw-font-medium tw-text-gray-700 tw-border-gray-200">
+                      <div class="tw-inline-block tw-p-4">Relevant Skills</div>
+                    </div>
+                    <div
+                      class="tw-flex tw-flex-wrap tw-m-2 tw-bg-white tw-w-full tw-mt-1 tw-max-h-60 tw-overflow-auto tw-z-10">
+                      <div *ngFor="let item of filteredSkillSuggestions;let i = index"
+                           class="hover:tw-bg-gray-200 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md tw-m-1"
+                           (click)="handleSkillSelect(item,i)">
+                        {{ item.title }}
+                      </div>
+                      <div *ngIf="filteredSkillSuggestions.length === 0">No Skills Found</div>
+                    </div>
+
+                    <!-- Skill Levels Section -->
+                    <div
+                      class="tw-text-sm tw-font-medium tw-text-center tw-text-gray-700 tw-bg-gray-100 tw-border-b tw-border-gray-200">
+                      <div class="tw-flex tw-items-center tw-justify-center tw-space-x-4 tw-p-4">
+                        <div *ngFor="let level of skillLevels" class="tw-flex tw-items-center">
+                          <input
+                            type="radio"
+                            [id]="level.id"
+                            name="skill-level"
+                            class="tw-hidden peer"
+                            [checked]="selectedLevel === level.id"
+                            (change)="handleLevelChange(level.id)"
+                          />
+                          <label
+                            [for]="level.id"
+                            [class]="selectedLevel === level.id ? 'tw-bg-indigo-600 tw-text-white' : 'hover:tw-bg-gray-200'"
+                            class="tw-cursor-pointer tw-px-4 tw-py-2 tw-border tw-border-gray-300 tw-rounded-md"
+                          >
+                            {{ level.label }}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- URL Input Field -->
+                <div *ngIf="field.type === 'url'" class="tw-w-full">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <div>
+                      <label style="margin-bottom: 0;">{{ field.label }}</label>
+                      <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    </div>
+                    <span class="tw-text-red-500" *ngIf="isInvalidControl(field.name)">
+                        {{ field.placeholder }} is required
+                      </span>
+                  </div>
+                  <input
+                    style="border:1px solid #ced4da"
+                    [formControlName]="field.name"
+                    [placeholder]="field.placeholder"
+                    [ngClass]="{'tw-mt-1 tw-py-2 tw-px-3 tw-h-[40px] tw-block tw-w-full tw-rounded-md tw-shadow-sm tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm': true,
+                    'tw-border-red-500 tw-focus:ring-red-500 tw-focus:border-red-500': isInvalidControl(field.name),
+                    'tw-border-gainsboro': !isInvalidControl(field.name)}"
+                  >
+                </div>
+
+                <!-- File Input Field -->
+                <div *ngIf="field.type === 'file'" class="tw-w-full">
+                  <div>
+                    <div class="tw-col-span-1 tw-flex tw-flex-col tw-items-start tw-justify-start">
+                      <div class="tw-flex tw-items-center tw-justify-between">
+
+                        <div>
+                          <label style="margin-bottom: 0;"
+                                 class="tw-block tw-text-sm tw-font-medium tw-text-gray-700 tw-mb-1">
+                            {{ field.label }}
+                            <span>(size less than 1MB)</span>
+                            <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div
+                        class="tw-flex tw-justify-center tw-items-center tw-flex-col tw-border-2 tw-border-dashed tw-border-black-850
+                        tw-bg-gray-55 tw-border-gray-60-200 tw-rounded-lg tw-w-[85%] tw-h-[200px] tw-cursor-pointer"
+                        (drop)="handleDrop($event)"
+                        (dragover)="handleDragOver($event)"
+                        (dragleave)="handleDragLeave($event)"
+                        (click)="fileInput.click()"
+                      >
+                        <input
+                          type="file"
+                          accept=".jpeg,.png,.pdf,.docx"
+                          class="tw-hidden"
+                          #fileInput
+                          (change)="handleFileChange($event)"
+                        />
+                        <label class="tw-cursor-pointer">
+                          <div *ngIf="!file" class="tw-mb-2">
+                            <svg
+                              class="tw-mx-auto tw-h-12 tw-w-12 tw-text-black"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M7 16v-2a4 4 0 014-4h1m4 4v6m0 0H7m4 0h6m-3-4l-3 3-3-3"
+                              />
+                            </svg>
+                          </div>
+                          <div *ngIf="file" class="tw-mt-2 tw-w-[85%] tw-text-black">
+                            Selected file: {{ file?.name }}
+                          </div>
+                          <p *ngIf="!file" class="tw-text-black">
+                            Drag & drop files or <span class="tw-text-blue-600 tw-cursor-pointer">Browse</span>
+                          </p>
+                        </label>
+                        <p *ngIf="!file" class="tw-text-xs tw-mt-4 tw-text-pg_2">
+                          Select pdf or docs
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="field.type === 'language'" class="tw-w-full">
+                  <div class="tw-flex tw-items-center tw-justify-between tw-w-full">
+                    <div class="tw-w-[40%]">
+                      <h6 class="tw-text-lg tw-font-medium">Rate Your English Communication Skills</h6>
+                    </div>
+                    <div class="tw-w-[60%] tw-flex tw-items-center tw-justify-end">
+                      <input
+                        type="range"
+                        min="1"
+                        max="10"
+                        [(ngModel)]="value"
+                        class="tw-w-[70%] tw-bg-red-600 tw-text-white tw-py-2"
+                      />
+                      <span class="tw-ml-4 tw-w-[30%] tw-text-blue-500 tw-font-medium tw-text-sm">
+                    {{ getLabel(value) }}
+                  </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Textarea Field -->
+                <div *ngIf="field.type === 'textarea'" class="tw-w-full">
+                  <div class="tw-flex tw-items-center tw-justify-between">
+                    <label style="margin-bottom: 0;">{{ field.label }}</label>
+                    <span *ngIf="field.required" class="tw-text-red-500">*</span>
+                    <span *ngIf="isInvalidControl(field.name)">
+                        {{ field.placeholder }} is required
+                      </span>
+                  </div>
+                  <textarea style="border:1px solid #ced4da" [formControlName]="field.name"
+                            [placeholder]="field.placeholder"
+                            [ngClass]="{'tw-mt-1 tw-py-2 tw-px-3 tw-h-[80px] tw-block tw-w-full tw-rounded-md tw-shadow-sm tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm': true,
+                            'tw-border-red-500 tw-focus:ring-red-500 tw-focus:border-red-500': isInvalidControl(field.name),
+                            'tw-border-gainsboro': !isInvalidControl(field.name)}"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tw-mt-4 tw-mb-4">
+          <div class="tw-flex tw-items-center tw-justify-center tw-gap-4">
+            <button
+              type="button"
+              class="tw-border-black-850 tw-text-black-850 tw-border-[1px] tw-py-2 tw-px-2 tw-rounded-lg"
+            >
+              Cancel
+            </button>
+            <button style="background: #70BF45; border:none"
+                    type="submit"
+                    class="tw-text-white tw-py-2 tw-px-2 tw-rounded-lg"
+            >
+              Submit Application
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+<app-job-footer></app-job-footer>

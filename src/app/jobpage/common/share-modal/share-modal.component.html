@@ -1,0 +1,73 @@
+<div>
+    <div style="cursor:auto"
+         class="tw-justify-center tw-bg-black tw-bg-opacity-25 tw-items-center tw-flex tw-overflow-x-hidden tw-overflow-y-auto tw-fixed tw-inset-0 tw-z-50 tw-outline-none tw-focus:outline-none">
+        <div class="tw-relative tw-w-[300px] sm:tw-w-[300px] md:tw-w-[400px] lg:tw-w-[500px] tw-my-3 tw-mx-auto">
+            <div class="tw-border-0 tw-ps-5 tw-pe-5 tw-pb-3 tw-relative tw-flex tw-flex-col tw-w-full tw-bg-white tw-outline-none tw-focus:outline-none tw-rounded-lg">
+                <div style="border-bottom: 1px solid gray" class="tw-flex tw-items-start tw-justify-between tw-pt-3 tw-pb-2 tw-rounded-t">
+                    <h4 [style.fontWeight]="'300'" class="tw-text-22 tw-text-center tw-text-black tw-mt-2">
+                        Share Job</h4>
+                    <button
+                            class="tw-ml-auto tw-bg-transparent tw-border-0 tw-text-black tw-float-right tw-text-3xl tw-leading-none tw-outline-none tw-focus:outline-none"
+                            (click)="closeModal()"
+                    >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                    d="M22.4818 4.54551C23.3192 3.70813 23.3199 2.35117 22.4834 1.51465C21.6469 0.678132 20.2899 0.678831 19.4525 1.51621L1.51696 19.4518C0.67958 20.2892 0.678882 21.6461 1.5154 22.4827C2.35192 23.3192 3.70888 23.3185 4.54626 22.4811L22.4818 4.54551Z"
+                                    fill="#6D6D6D"/>
+                            <path
+                                    d="M19.4545 22.4838C20.2919 23.3212 21.6488 23.3219 22.4853 22.4854C23.3219 21.6488 23.3212 20.2919 22.4838 19.4545L4.54821 1.51891C3.71083 0.681533 2.35387 0.680835 1.51735 1.51735C0.680832 2.35387 0.68153 3.71083 1.51891 4.54821L19.4545 22.4838Z"
+                                    fill="#6D6D6D"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="tw-pb-4">
+                    <div>
+                        <div class="tw-flex tw-flex-col tw-align-items-center tw-justify-start">
+                            <p class="tw-mt-3 tw-mb-3 tw-text-black-750 tw-text-18" [style.color]="'#475568'"
+                               [style.fontWeight]="'100'">Share via</p>
+                            <div class="tw-flex tw-flex-row">
+                                <div class="tw-pe-2" (click)="shareOnWhatsApp()">
+                                    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" aria-label="WhatsApp"
+                                         role="img"
+                                         viewBox="0 0 512 512" fill="#000000">
+                                        <rect width="512" height="512" rx="15%" fill="#25d366"></rect>
+                                        <path fill="#25d366" stroke="#ffffff" stroke-width="26"
+                                              d="M123 393l14-65a138 138 0 1150 47z"></path>
+                                        <path fill="#ffffff"
+                                              d="M308 273c-3-2-6-3-9 1l-12 16c-3 2-5 3-9 1-15-8-36-17-54-47-1-4 1-6 3-8l9-14c2-2 1-4 0-6l-12-29c-3-8-6-7-9-7h-8c-2 0-6 1-10 5-22 22-13 53 3 73 3 4 23 40 66 59 32 14 39 12 48 10 11-1 22-10 27-19 1-3 6-16 2-18"></path>
+                                    </svg>
+                                </div>
+                                <div (click)="shareOnLinkedIn()" class="tw-mb-2">
+                                    <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                                d="M34.3073 33.8705H28.3412V24.6195C28.3412 22.4135 28.3015 19.5736 25.2383 19.5736C22.131 19.5736 21.6555 21.9772 21.6555 24.4589V33.8699H15.6895V14.846H21.4169V17.4458H21.4971C22.0702 16.4754 22.8985 15.6772 23.8936 15.136C24.8887 14.5948 26.0135 14.3311 27.148 14.3728C33.1949 14.3728 34.3098 18.311 34.3098 23.4343L34.3073 33.8705ZM8.95778 12.2455C8.27302 12.2457 7.6036 12.0447 7.03418 11.6681C6.46476 11.2916 6.02094 10.7562 5.75878 10.1299C5.49662 9.50354 5.42792 8.81428 5.56138 8.14927C5.69485 7.48427 6.02449 6.87339 6.5086 6.39387C6.99271 5.91436 7.60955 5.58776 8.28112 5.45537C8.9527 5.32298 9.64882 5.39074 10.2815 5.65009C10.9142 5.90944 11.455 6.34873 11.8355 6.9124C12.216 7.47608 12.4192 8.13883 12.4193 8.81684C12.4194 9.26702 12.3299 9.71281 12.156 10.1288C11.9821 10.5447 11.7272 10.9227 11.4057 11.241C11.0843 11.5594 10.7027 11.812 10.2826 11.9843C9.86262 12.1567 9.41244 12.2454 8.95778 12.2455ZM11.9408 33.8705H5.96854V14.846H11.9408V33.8705ZM37.2816 -0.0964049H2.97061C2.19185 -0.105107 1.44142 0.19268 0.884285 0.731519C0.327152 1.27036 0.00889402 2.00616 -0.000610352 2.77725V36.8913C0.00856873 37.6627 0.32664 38.399 0.883754 38.9384C1.44087 39.4778 2.19146 39.7762 2.97061 39.768H37.2816C38.0623 39.7777 38.815 39.4802 39.3743 38.9408C39.9336 38.4014 40.2538 37.6642 40.2646 36.8913V2.77479C40.2535 2.00217 39.9331 1.26553 39.3737 0.726704C38.8144 0.187879 38.0619 -0.109057 37.2816 -0.0988672"
+                                                fill="#0A66C2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="tw-mt-2 tw-mb-2 tw-text-black-750 tw-text-18" [style.color]="'#475568'"
+                               [style.fontWeight]="'100'">Or Copy Link</p>
+                            <div class="tw-flex tw-align-items-center tw-justify-center tw-w-[100]">
+                                <input [style.color]="'#475568'" [style.fontWeight]="'100'"
+                                       class="tw-bg-white tw-text-black tw-p-2 tw-border tw-border-gray-300 tw-rounded tw-w-[70%]"
+                                       type="text"
+                                       [(ngModel)]="copyLink"
+                                       readOnly/>
+                                <button (click)="copyToClipboard()" style="background: #70BF45"
+                                        class="tw-text-white tw-border-0 tw-rounded-lg tw-p-1 tw-ms-1 tw-w-[30%]">
+                                    {{ buttonText }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="tw-opacity-10 tw-fixed tw-inset-0 tw-z-40 tw-bg-black"></div>
+</div>

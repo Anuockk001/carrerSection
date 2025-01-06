@@ -1,0 +1,108 @@
+<app-job-header></app-job-header>
+<div class="tw-text-sm sm:tw-text-base">
+  <app-job-top-section
+    [data]="{
+      heading: post.title,
+      description: 'Posted on ' + (post?.createdDate | date: 'MMM dd YYYY')
+    }"
+  ></app-job-top-section>
+
+  <div class="tw-container tw-px-4 sm:tw-px-6 lg:tw-px-8 tw-mx-auto">
+    <div class="tw-mb-4 tw-mt-6">
+      <div class="tw-flex tw-items-center tw-justify-start">
+        <a class="tw-text-black tw-text-lg sm:tw-text-lg md:tw-text-xl md:tw-mb-4 tw-me-2" routerLink="/job">Job Listing</a>
+        <div class="md:tw-mb-4">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 1024 1024"
+            class="tw-icon"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#000000"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
+                fill="#000000"
+              ></path>
+            </g>
+          </svg>
+        </div>
+        <a class="tw-text-black tw-text-lg sm:tw-text-lg md:tw-text-xl md:tw-mb-4 tw-ms-2" routerLink="/">Job Detail</a>
+      </div>
+      <hr style="margin:0; padding: 0;" />
+    </div>
+    <div>
+      <h3 class="tw-text-xl sm:tw-text-xl md:tw-text-2xl tw-mt-6 md:tw-mb-4">{{ post.title }}</h3>
+    </div>
+    <div class="tw-flex tw-flex-col-reverse md:tw-flex-row tw-gap-4">
+      <div class="md:tw-w-3/4">
+        <div
+          class="tw-text-sm sm:tw-text-base tw-font-normal tw-leading-6"
+          [innerHTML]="
+            '<style> ul { list-style: disc; margin-left: 20px } ol { list-style: decimal; margin-left: 16px }</style>' +
+            post.description
+          "
+        ></div>
+      </div>
+      <div class="md:tw-w-1/4 tw-mb-6">
+        <div class="tw-flex tw-mt-5">
+          <button
+            (click)="openModal(jobId)"
+            class="tw-border tw-bg-white tw-border-blue-500 tw-text-blue-500 tw-p-2 tw-rounded-lg tw-flex tw-items-center tw-gap-2 tw-text-sm sm:tw-text-base"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M13.803 5.33333C13.803 3.49238 15.3022 2 17.1515 2C19.0008 2 20.5 3.49238 20.5 5.33333C20.5 7.17428 19.0008 8.66667 17.1515 8.66667C16.2177 8.66667 15.3738 8.28596 14.7671 7.67347L10.1317 10.8295C10.1745 11.0425 10.197 11.2625 10.197 11.4872C10.197 11.9322 10.109 12.3576 9.94959 12.7464L15.0323 16.0858C15.6092 15.6161 16.3473 15.3333 17.1515 15.3333C19.0008 15.3333 20.5 16.8257 20.5 18.6667C20.5 20.5076 19.0008 22 17.1515 22C15.3022 22 13.803 20.5076 13.803 18.6667C13.803 18.1845 13.9062 17.7255 14.0917 17.3111L9.05007 13.9987C8.46196 14.5098 7.6916 14.8205 6.84848 14.8205C4.99917 14.8205 3.5 13.3281 3.5 11.4872C3.5 9.64623 4.99917 8.15385 6.84848 8.15385C7.9119 8.15385 8.85853 8.64725 9.47145 9.41518L13.9639 6.35642C13.8594 6.03359 13.803 5.6896 13.803 5.33333Z"
+                fill="#3B81F6"
+              />
+            </svg>
+            Share Job
+          </button>
+          <button style="background: #70BF45; border:none" class="tw-ms-2 tw-text-white tw-p-2 tw-rounded-lg tw-text-sm sm:tw-text-base">
+            <a style="color:white; border:none" [routerLink]="['/job', post.id, 'apply']">Apply for the role</a>
+          </button>
+        </div>
+        <div class="tw-border-l tw-border-gray-200 tw-mt-6">
+          <div class="tw-pl-5">
+            <div class="tw-text-gray-600 tw-text-base tw-font-semibold">Job Information</div>
+            <div class="tw-mt-4 tw-space-y-4">
+              <div>
+                <span>Posted on</span>: <span>{{(post?.createdDate | date: 'MMM dd yyyy') }}</span>
+              </div>
+              <div>
+                <span>Job Type</span>: <span>{{ post?.jobTypes?.join(', ') ?? 'N/A' }}</span>
+              </div>
+              <div>
+                <span>Work Experience</span>: <span>{{ post?.minExperience ?? 'N/A' }} - {{ post?.maxExperience ?? 'N/A' }} years</span>
+              </div>
+              <div>
+                <span>Job Location</span>: <span>{{ post?.workLocations?.join(', ') ?? 'N/A' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tw-flex tw-items-center tw-justify-center tw-mt-14 tw-mb-6 tw-gap-5">
+    <a class="tw-text-sm sm:tw-text-base tw-font-medium tw-underline tw-text-primary" routerLink="/job">
+      Job Listing
+    </a>
+    <a class="tw-text-sm sm:tw-text-base tw-font-medium tw-underline tw-text-primary" routerLink="/">
+      Visit Website
+    </a>
+  </div>
+</div>
+<app-job-footer></app-job-footer>
