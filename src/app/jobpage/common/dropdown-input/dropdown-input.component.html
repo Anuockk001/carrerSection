@@ -1,0 +1,27 @@
+<div class="w-full mt-3">
+  <div class="flex items-center justify-between">
+    <div>
+      <label style="margin-bottom: 0;">{{ label }}</label>
+      <span *ngIf="required" class="text-red-500">*</span>
+    </div>
+    <span class="text-red-500" *ngIf="isInvalid">
+      {{ placeholder }} is required
+    </span>
+  </div>
+  <select
+    style="border:1px solid #ced4da"
+    [formControl]="control"
+    [ngClass]="{
+  'mt-1 py-2 px-3 h-[40px] block w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm': true,
+  'border-red-500 focus:ring-red-500 focus:border-red-500': isInvalid,
+  'border-gainsboro': !isInvalid
+  }"
+  >
+    <option value="" disabled>
+      Select {{ label }}
+    </option>
+    <option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </option>
+  </select>
+</div>
