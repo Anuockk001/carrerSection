@@ -1,24 +1,24 @@
-<section class="tw-relative tw-h-auto tw-xl:tw-h-[240px]">
+<section class="relative h-auto xl:h-[240px]">
   <img
     src='../../../../assets/images/bgConnect.png'
     alt="Background"
-    class="tw-absolute tw-w-full tw-inset-0 tw-bg-cover tw-bg-center"
+    class="absolute w-full inset-0 bg-cover bg-center"
   />
-  <div class="tw-absolute tw-inset-0 tw-bg-blue-950 tw-opacity-75"></div>
-  <div class="tw-relative tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-between tw-px-4 sm:tw-px-8 md:tw-px-16 lg:tw-px-24 tw-py-6 tw-h-full tw-space-y-6 md:tw-space-y-0">
-    <div class="tw-text-center md:tw-text-left tw-text-white tw-flex-1">
-      <h2 class="tw-text-[18px] sm:tw-text-[22px] md:tw-text-[28px] lg:tw-text-[32px] tw-font-medium tw-leading-snug tw-mb-4 md:tw-w-3/5">
+  <div class="absolute inset-0 bg-blue-950 opacity-75"></div>
+  <div class="relative flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-16 lg:px-24 py-6 h-full space-y-6 md:space-y-0">
+    <div class="text-center md:text-left text-white flex-1">
+      <h2 class="text-[18px] sm:text-[22px] md:text-[28px] lg:text-[32px] font-medium leading-snug mb-4 md:w-3/5">
         {{ data.heading }}
       </h2>
-      <p class="tw-text-[14px] sm:tw-text-[16px] md:tw-text-[18px] tw-text-gray-300 tw-w-full md:tw-w-4/5 lg:tw-w-3/5 tw-mx-auto md:tw-mx-0">
+      <p class="text-[14px] sm:text-[16px] md:text-[18px] text-gray-300 w-full md:w-4/5 lg:w-3/5 mx-auto md:mx-0">
         {{ data.description }}
       </p>
     </div>
-    <div class="tw-w-full md:tw-w-auto tw-flex tw-justify-center tw-items-center">
+    <div class="w-full md:w-auto flex justify-center items-center">
       <button
-              style="background: #70BF45"
+        style="background: #70BF45"
         (click)="handleButtonClick()"
-        class=" tw-text-white tw-text-sm sm:tw-text-base xl:tw-text-16 tw-px-6 sm:tw-px-8 md:tw-px-10 tw-py-2 sm:tw-py-3 tw-rounded tw-hover:bg-blue-700 tw-transition tw-duration-300"
+        class="text-white text-sm sm:text-base xl:text-16 px-6 sm:px-8 md:px-10 py-2 sm:py-3 rounded hover:bg-blue-700 transition duration-300"
       >
         {{ data.buttonText }}
       </button>

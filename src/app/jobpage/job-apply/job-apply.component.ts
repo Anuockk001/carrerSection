@@ -1,24 +1,36 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ApiService} from "../../services/api.service";
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {convertToWords} from "../../common/function";
-import {CountryISO, PhoneNumberFormat, SearchCountryField} from "ngx-intl-tel-input";
+// import {CountryISO, PhoneNumberFormat, SearchCountryField} from "ngx-intl-tel-input";
 import {fieldsConfig} from "../common/jobFileds/jobFileds";
+import {JobTopSectionComponent} from '../common/job-top-section/job-top-section.component';
+import {DatePipe, NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
+import {ApiService} from '../../others/api.service';
 
 @Component({
   selector: 'app-job-apply',
   templateUrl: './job-apply.component.html',
+  imports: [
+    JobTopSectionComponent,
+    DatePipe,
+    ReactiveFormsModule,
+    NgStyle,
+    NgForOf,
+    NgClass,
+    NgIf,
+    FormsModule,
+  ],
   styleUrls: ['./job-apply.component.css']
 })
 export class JobApplyComponent implements OnInit {
-  form: FormGroup;
+  form!: FormGroup;
   fieldsConfig = fieldsConfig;
   post: any = {};
   open = false;
   jobId: number | null = null;
-  private routeSub: Subscription;
+  private routeSub!: Subscription;
   @ViewChild('dropdown') dropdownRef!: ElementRef;
   @ViewChild('dropdownSkills') dropdownSkillRef!: ElementRef;
   inputValue: string = '';
@@ -30,10 +42,10 @@ export class JobApplyComponent implements OnInit {
   file: File | null = null;
   value: number = 5;
   skillsRes:any
-  preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
-  SearchCountryField = SearchCountryField;
-  CountryISO = CountryISO;
-  PhoneNumberFormat = PhoneNumberFormat;
+  // preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
+  // SearchCountryField = SearchCountryField;
+  // CountryISO = CountryISO;
+  // PhoneNumberFormat = PhoneNumberFormat;
   MAX_FILE_SIZE = 1048576;
   inputControl = new FormControl('');
   selectedItems: any[] = [];
@@ -68,16 +80,16 @@ export class JobApplyComponent implements OnInit {
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    if (!this.dropdownRef.nativeElement.contains(target)) {
-      this.isDropdownOpen = false;
-    }
-    if (!this.dropdownSkillRef.nativeElement.contains(target)) {
-      this.isSkillDropdownOpen = false;
-    }
-  }
+  // @HostListener('document:click', ['$event'])
+  // onClickOutside(event: MouseEvent): void {
+  //   const target = event.target as HTMLElement;
+  //   if (!this.dropdownRef.nativeElement.contains(target)) {
+  //     this.isDropdownOpen = false;
+  //   }
+  //   if (!this.dropdownSkillRef.nativeElement.contains(target)) {
+  //     this.isSkillDropdownOpen = false;
+  //   }
+  // }
 
   handleSkillSelect(skill: any, index: number): void {
     if (!this.selectedSkillItems.some((selected) => selected.id === skill.id)) {
@@ -140,7 +152,7 @@ export class JobApplyComponent implements OnInit {
 
   isInvalidControl(controlName: string): boolean {
     const control = this.form.get(controlName);
-    return control?.invalid && control?.touched ? true : false;
+    return !!(control?.invalid && control?.touched);
   }
 
   onSubmit(): void {
@@ -236,5 +248,4 @@ export class JobApplyComponent implements OnInit {
       return 'Poor';
     }
   }
-
 }

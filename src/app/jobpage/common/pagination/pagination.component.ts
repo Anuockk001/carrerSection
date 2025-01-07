@@ -1,9 +1,14 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {NgClass, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css'],
+  imports: [
+    NgForOf,
+    NgClass
+  ]
 })
 export class PaginationComponent implements OnInit {
   @Input() currentPage: number = 0;
@@ -22,22 +27,24 @@ export class PaginationComponent implements OnInit {
     const startPage = Math.max(this.currentPage - 1, 1);
     const endPage = Math.min(this.currentPage + 1, this.totalPages - 1);
 
-    pageNumbers.push(0);
-
+    // Add leading ellipsis if necessary
     if (this.currentPage > 2) {
       pageNumbers.push('...');
     }
 
+    // Add the range of page numbers
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(i);
     }
 
-    if (endPage < this.totalPages - 2) {
+    // Add trailing ellipsis if necessary
+    if (endPage < this.totalPages - 1) {
       pageNumbers.push('...');
     }
 
-    if (this.totalPages > 1 && !pageNumbers.includes(this.totalPages - 1)) {
-      pageNumbers.push(this.totalPages - 1);
+    // Add the last page if not already included
+    if (this.totalPages > 1 && !pageNumbers.includes(this.totalPages)) {
+      pageNumbers.push(this.totalPages);
     }
 
     return pageNumbers;

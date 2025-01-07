@@ -1,22 +1,22 @@
-<div style="border-left:3px solid #456476" class="tw-bg-white tw-min-w-[95vw] sm:tw-min-w-[95vw] md:tw-min-w-[330px] 2xl:tw-min-w-[358px] xl:tw-min-w-[400px] lg:tw-min-w-[300px] tw-min-h-[124px] tw-rounded-lg tw-shadow-lg tw-p-4 tw-w-full tw-max-w-md tw-mx-auto">
-  <div class="tw-flex tw-justify-between tw-items-center">
-    <div class='tw-flex tw-flex-row tw-flex-wrap tw-gap-2'>
+<div style="border-left:3px solid #456476" class="bg-white min-w-[95vw] sm:min-w-[95vw] md:min-w-[330px] 2xl:min-w-[358px] xl:min-w-[400px] lg:min-w-[300px] min-h-[124px] rounded-lg shadow-lg p-4 w-full max-w-md mx-auto">
+  <div class="flex justify-between items-center">
+    <div class='flex flex-row flex-wrap gap-2'>
       <div *ngFor="let type of jobs.jobTypes">
-        <div class="tw-flex tw-items-center">
+        <div class="flex items-center">
           <span
             style="background:#E8ECEE; color: #4B687A; border: 0.4px solid #879982; font-weight: 200;"
-            class="tw-bg-gray-55 tw-text-blue-800 tw-text-8 sm:tw-text-8 md:tw-text-10 lg:tw-text-10 xl:tw-text-14 tw-rounded-sm tw-ps-1 tw-pe-1">
+            class="bg-gray-55 text-blue-800 text-8 sm:text-8 md:text-10 lg:text-10 xl:text-14 rounded-sm ps-1 pe-1">
         {{ type ?? '--' }}
         </span>
         </div>
       </div>
       <span
         style="background: #E8ECEE; color: #4B687A; border:0.4px solid #879982; font-weight: 200"
-        class="tw-bg-gray-55 tw-text-blue-800 tw-text-8 sm:tw-text-8 md:tw-text-10 lg:tw-text-10 xl:tw-text-14 tw-rounded-sm tw-ps-1 tw-pe-1">
+        class="bg-gray-55 text-blue-800 text-8 sm:text-8 md:text-10 lg:text-10 xl:text-14 rounded-sm ps-1 pe-1">
         {{ 'Exp.' }} {{ jobs.minExperience }} {{ '-' }} {{ jobs.maxExperience }} {{ 'Yrs' }}
       </span>
     </div>
-    <div (click)="$event.stopPropagation(); openModal(jobs.id)" aria-label="Share Job" class="tw-text-blue-800 tw-hover:text-blue-600">
+    <div (click)="$event.stopPropagation(); openModal(jobs.id)" aria-label="Share Job" class="text-blue-800 hover:text-blue-600">
       <svg
         width="20"
         height="20"
@@ -33,11 +33,11 @@
     </div>
   </div>
 
-  <h4 style="font-weight: 400" class="tw-text-18 tw-text-gray-800 tw-mt-2 tw-sm:text-18 tw-md:text-20 tw-lg:text-22 tw-xl:text-24">
-    {{ jobs?.title ?? '--' }}
+  <h4 style="font-weight: 400" class="text-[18px] text-gray-800 mt-2 sm:text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px]">
+    {{ jobs.title }}
   </h4>
-  <div class="tw-flex tw-items-center tw-justify-between tw-mt-2 tw-text-gray-600">
-    <div class="tw-flex tw-items-center tw-justify-center">
+  <div class="flex items-center justify-between mt-2 text-gray-600">
+    <div class="flex items-center justify-center">
       <svg
         width="14"
         height="14"
@@ -47,12 +47,12 @@
         <path
           d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24 C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24 C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"></path>
       </svg>
-      <span class="tw-ml-2 tw-text-10 sm:tw-text-10 md:tw-text-12 lg:tw-text-14 xl:tw-text-16">
-        {{ jobs?.workLocations ?? '--' }}
+      <span class="ml-2 text-10 sm:text-10 md:text-12 lg:text-14 xl:text-16">
+        {{ jobs.workLocations }}
       </span>
     </div>
-    <span class="tw-text-gray-600 tw-text-14">
-      Posted on: <span>{{ jobs?.createdDate | date: "MMM dd yyyy" }}
+    <span class="text-gray-600 text-14">
+      Posted on: <span>{{ jobs.createdDate | date: "MMM dd yyyy" }}
     </span>
     </span>
   </div>

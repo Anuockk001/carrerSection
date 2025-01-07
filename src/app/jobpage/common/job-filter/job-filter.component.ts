@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {NgForOf} from '@angular/common';
 
 export const experienceRanges: { [key: string]: { min: number; max: number } } = {
   '0-1 years': { min: 0, max: 1 },
@@ -13,6 +14,9 @@ export const experienceRanges: { [key: string]: { min: number; max: number } } =
   selector: 'app-job-filters',
   templateUrl: './job-filter.component.html',
   styleUrls: ['./job-filter.component.css'],
+  imports: [
+    NgForOf
+  ],
   encapsulation: ViewEncapsulation.Emulated
 })
 export class JobFiltersComponent implements OnInit {

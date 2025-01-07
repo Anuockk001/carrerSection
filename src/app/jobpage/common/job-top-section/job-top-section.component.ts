@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NgIf} from '@angular/common';
 interface Data {
   heading: string;
   description: string;
@@ -9,6 +10,9 @@ interface Data {
 @Component({
   selector: 'app-job-top-section',
   templateUrl: './job-top-section.component.html',
+  imports: [
+    NgIf
+  ],
   styleUrls: ['./job-top-section.component.css']
 })
 export class JobTopSectionComponent implements OnInit {

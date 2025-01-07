@@ -1,10 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {environment} from "../../../../environments/environment";
+// import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-share-modal',
   templateUrl: './share-modal.component.html',
+  imports: [
+    FormsModule
+  ],
   styleUrls: ['./share-modal.component.css']
 })
 export class ShareModalComponent implements OnInit {
@@ -12,8 +15,8 @@ export class ShareModalComponent implements OnInit {
   buttonText: string = 'Copy Link';
 
   constructor(
-      @Inject(MAT_DIALOG_DATA) public data: any,
-      private dialogRef: MatDialogRef<ShareModalComponent>
+      // @Inject(MAT_DIALOG_DATA) public data: any,
+      // private dialogRef: MatDialogRef<ShareModalComponent>
   ) {
   }
 
@@ -23,12 +26,12 @@ export class ShareModalComponent implements OnInit {
 
   ngOnChanges(): void {
     this.setCopyLink();
-    console.log('data',this.data)
+    // console.log('data',this.data)
   }
 
   private setCopyLink(): void {
-    const baseUrl = environment.url;
-    this.copyLink = `${baseUrl}job/${this.data.jobId}`;
+    // const baseUrl = environment.url;
+    // this.copyLink = `${baseUrl}job/${this.data.jobId}`;
   }
 
   copyToClipboard(): void {
@@ -54,6 +57,6 @@ export class ShareModalComponent implements OnInit {
   }
 
   closeModal(): void {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 }

@@ -1,12 +1,31 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ApiService } from '../services/api.service';
 import {Router} from "@angular/router";
+import {ApiService} from '../others/api.service';
+import {JobHeaderComponent} from './common/job-header/job-header.component';
+import {JobTopSectionComponent} from './common/job-top-section/job-top-section.component';
+import {JobFiltersComponent} from './common/job-filter/job-filter.component';
+import {JobListingCardComponent} from './common/job-listing-card/job-listing-card.component';
+import {PaginationComponent} from './common/pagination/pagination.component';
+import {ConnectNowComponent} from './common/connect-now/connect-now.component';
+import {JobFooterComponent} from './common/job-footer/job-footer.component';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'jobpage',
   templateUrl: './jobpage.component.html',
   styleUrls: ['./jobpage.component.css'],
-  encapsulation:ViewEncapsulation.Emulated
+  standalone: true,
+  imports: [
+    JobHeaderComponent,
+    JobTopSectionComponent,
+    JobFiltersComponent,
+    JobListingCardComponent,
+    PaginationComponent,
+    ConnectNowComponent,
+    JobFooterComponent,
+    CommonModule
+  ],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class JobpageComponent implements OnInit {
   filtersVisible = true;
@@ -19,7 +38,7 @@ export class JobpageComponent implements OnInit {
   query = '';
   jobTypes: string[] = [];
   workLocations: string[] = [];
-  selectedRanges:[];
+  selectedRanges:[] = [];
   data = {
     heading: 'Work with us',
     description: 'Build your future with a team that values your talent.',

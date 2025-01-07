@@ -1,10 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {environment} from "../../../environments/environment";
+// import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-jobshare',
   templateUrl: './jobshare.component.html',
+  imports: [
+    FormsModule
+  ],
   styleUrls: ['./jobshare.component.css']
 })
 export class JobshareComponent implements OnInit {
@@ -12,8 +15,8 @@ export class JobshareComponent implements OnInit {
   buttonText: string = 'Copy Link';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<JobshareComponent>
+    // @Inject(MAT_DIALOG_DATA) public data: any,
+    // private dialogRef: MatDialogRef<JobshareComponent>
   ) {
   }
 
@@ -26,8 +29,8 @@ export class JobshareComponent implements OnInit {
   }
 
   private setCopyLink(): void {
-    const baseUrl = environment.shareUrl;
-    this.copyLink = `${baseUrl}apply/${this.data}`;
+    // const baseUrl = environment.shareUrl;
+    // this.copyLink = `${baseUrl}apply/${this.data}`;
   }
 
   copyToClipboard(): void {
@@ -53,6 +56,6 @@ export class JobshareComponent implements OnInit {
   }
 
   closeModal(): void {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 }

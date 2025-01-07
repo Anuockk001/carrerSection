@@ -1,18 +1,17 @@
-<app-job-header></app-job-header>
 <div>
   <app-job-top-section
     [data]="data"
     (queryChange)="handleQueryChange($event)"
   >
   </app-job-top-section>
-  <div class="tw-container tw-px-2 sm:tw-px-6 md:tw-px-9 lg:tw-px-4 tw-mx-auto">
-    <div class="tw-flex tw-items-center tw-justify-center tw-mt-6">
-      <h1 class="tw-text-[28px] sm:tw-text-[28px] md:tw-text-32 lg:tw-text-[40px] xl:tw-text-[40px] 2xl:tw-text-[48px] tw-font-fw-500">Current Openings</h1>
+  <div class="container px-2 sm:px-6 md:px-9 lg:px-4 mx-auto">
+    <div class="flex items-center justify-center mt-6">
+      <h1 class="text-[28px] sm:text-[28px] md:text-32 lg:text-[40px] xl:text-[40px] 2xl:text-[48px] font-fw-500">Current Openings</h1>
     </div>
-    <div class="tw-flex tw-mt-5 tw-mb-6 ">
-      <div class="tw-flex-grow"></div>
+    <div class="flex mt-5 mb-6 ">
+      <div class="flex-grow"></div>
       <div *ngIf="filtersVisible"
-           class="tw-transition-transform tw-duration-300 tw-min-w-[280px] tw-border-r-1 tw-me-5 tw-hidden lg:tw-block">
+           class="transition-transform duration-300 min-w-[280px] border-r-1 me-5 hidden lg:block">
         <app-job-filters
           (filterChange)="handleFilterChange($event)"
           [jobTypes]="jobTypes"
@@ -20,9 +19,9 @@
           [selectedRanges]="selectedRanges"
         ></app-job-filters>
       </div>
-      <div class="lg:tw-float-end">
-        <div class="tw-flex tw-flex-col tw-mt-2 tw-cursor-pointer">
-          <div class="tw-hidden lg:tw-flex tw-items-center tw-justify-start" (click)="toggleFilters()">
+      <div class="lg:float-end">
+        <div class="flex flex-col mt-2 cursor-pointer">
+          <div class="hidden lg:flex items-center justify-start" (click)="toggleFilters()">
             <svg
               width="20"
               height="20"
@@ -37,14 +36,14 @@
                   d="M17,11H5.41l2.3-2.29A1,1,0,1,0,6.29,7.29l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L5.41,13H17a1,1,0,0,0,0-2Zm4-7a1,1,0,0,0-1,1V19a1,1,0,0,0,2,0V5A1,1,0,0,0,21,4Z"></path>
               </g>
             </svg>
-            <span style="fontWeight:200" class="tw-ms-1 tw-text-[15]">Showing {{ size }}
+            <span style="fontWeight:200" class="ms-1 text-[15]">Showing {{ size }}
               out of {{ totalElements }}
               </span>
           </div>
 
-          <div class="tw-flex lg:tw-hidden tw-items-center tw-justify-end tw-me-3 tw-relative" (click)="toggleMobileFilters()">
-              <span class="tw-px-3 tw-py-1 tw-rounded-lg" style="color: #4B687A; border:0.4px solid #879982">
-                <div class="tw-flex tw-justify-center tw-items-center">
+          <div class="flex lg:hidden items-center justify-end me-3 relative" (click)="toggleMobileFilters()">
+              <span class="px-3 py-1 rounded-lg" style="color: #4B687A; border:0.4px solid #879982">
+                <div class="flex justify-center items-center">
                   <svg width="16" height="16" fill="#000000" viewBox="0 0 256 256" id="Flat"
                        xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -55,12 +54,12 @@
                         d="M112.001,229.05469A12.00583,12.00583,0,0,1,100,217.05176v-77.959a3.98926,3.98926,0,0,0-1.03955-2.68945l-65.75537-72.331A12,12,0,0,1,42.08447,44H213.91553a12,12,0,0,1,8.87939,20.07227l-65.75439,72.33007A3.98975,3.98975,0,0,0,156,139.09277v56.626a11.97406,11.97406,0,0,1-5.34424,9.98437l-31.99951,21.333A11.98627,11.98627,0,0,1,112.001,229.05469ZM42.08447,52A4.00015,4.00015,0,0,0,39.125,58.69141l65.75439,72.33007A11.971,11.971,0,0,1,108,139.09277v77.959a3.99924,3.99924,0,0,0,6.21826,3.32812l32.00049-21.333A3.99,3.99,0,0,0,148,195.71875v-56.626a11.97153,11.97153,0,0,1,3.12158-8.07226L216.875,58.69141A4.00015,4.00015,0,0,0,213.91553,52Z"></path>
                     </g>
                   </svg>
-                  <span class="tw-ms-1">Filters</span>
+                  <span class="ms-1">Filters</span>
                 </div>
               </span>
 
             <div *ngIf="mobileFiltersVisible" (click)="$event.stopPropagation()"
-                 class="tw-absolute tw-min-w-[150px] tw-bg-white tw-top-full tw-right-0 tw-shadow-lg tw-p-4 tw-z-10 tw-flex lg:tw-hidden">
+                 class="absolute min-w-[150px] bg-white top-full right-0 shadow-lg p-4 z-10 flex lg:hidden">
               <app-job-filters
                 (filterChange)="handleFilterChange($event)"
                 [jobTypes]="jobTypes"
@@ -70,8 +69,8 @@
             </div>
           </div>
 
-          <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-flex-wrap tw-gap-6 tw-mt-5 tw-items-start tw-justify-start sm:tw-items-center">
+          <div class="flex flex-col">
+            <div class="flex flex-wrap gap-6 mt-5 items-start justify-start sm:items-center">
               <div *ngFor="let job of jobs">
                 <div (click)="handleNavigate(job.id)">
                   <app-job-listing-card [jobs]="job"></app-job-listing-card>
@@ -102,11 +101,9 @@
         section: 'jobListing'}">
     </app-connect-now>
   </div>
-  <div class="tw-flex tw-align-items-center tw-justify-center tw-mt-8 tw-mb-1">
-    <a style="color:#173D54" class="tw-text-18 tw-font-fw-400" href="/public">
+  <div class="flex align-items-center justify-center mt-8 mb-1">
+    <a style="color:#173D54" class="text-18 font-fw-400" href="/public">
       <u>Visit Website</u>
     </a>
   </div>
 </div>
-
-<app-job-footer></app-job-footer>

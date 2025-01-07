@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
-import {NgDialogAnimationService} from "ng-dialog-animation";
+// import {NgDialogAnimationService} from "ng-dialog-animation";
 import {ShareModalComponent} from "../share-modal/share-modal.component";
+import {DatePipe, NgForOf} from '@angular/common';
 export interface Job {
   id: number;
   jobId: string;
@@ -134,6 +135,10 @@ export interface CustomerContact {
   selector: 'app-job-listing-card',
   templateUrl: './job-listing-card.component.html',
   styleUrls: ['./job-listing-card.component.css'],
+  imports: [
+    DatePipe,
+    NgForOf
+  ]
 })
 export class JobListingCardComponent implements OnInit {
   @Input() jobs!: Job;
@@ -153,7 +158,7 @@ export class JobListingCardComponent implements OnInit {
   }
 
   constructor(
-    public dialog: NgDialogAnimationService,
+    // public dialog: NgDialogAnimationService,
   ) {
   }
 
@@ -166,14 +171,14 @@ export class JobListingCardComponent implements OnInit {
   }
 
   openModal(job:any) {
-    const dialogRef = this.dialog.open(ShareModalComponent, {
-      data: {
-        jobId:job
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-
-    });
+    // const dialogRef = this.dialog.open(ShareModalComponent, {
+    //   data: {
+    //     jobId:job
+    //   }
+    // });
+    // dialogRef.afterClosed().subscribe((result) => {
+    //
+    // });
   }
 
 }
